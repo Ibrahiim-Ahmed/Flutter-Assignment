@@ -11,9 +11,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Quotes App',
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-      ),
+      // theme: ThemeData(
+      //   primaryColor: Colors.black,
+      // ),
       home: const MyHomePage(title: 'Quotes App'),
     );
   }
@@ -41,63 +41,102 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final quote = Quote.quotes[_currentIndex];
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Drawer Header'),
-            ),
-            ListTile(
-              title: const Text('Fashion'),
-              onTap: () {
-                _changeQuote(0);
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text('Sports'),
-              onTap: () {
-                _changeQuote(1);
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text("Inspirational"),
-              onTap: () {
-                _changeQuote(2);
-                Navigator.pop(context);
-              },
-            )
-          ],
+        appBar: AppBar(
+          title: Text(
+            widget.title,
+            style: TextStyle(fontSize: 30),
+          ),
+          backgroundColor: Colors.black,
         ),
-      ),
-      body: GestureDetector(
-        onTap: () => _changeQuote((_currentIndex + 1) % Quote.quotes.length),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                quote.text,
-                style:
-                    const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        backgroundColor: Color.fromARGB(255, 4, 107, 7),
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  border: Border.all(color: Colors.black, width: 8),
+                ),
+                child: Text(
+                  'Quotes Categories',
+                  style: TextStyle(
+                    fontSize: 45,
+                    decoration: TextDecoration.underline,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
               ),
-              const SizedBox(height: 18),
-              Text(
-                quote.author,
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
+              ListTile(
+                title: Text(
+                  'Fashion',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                onTap: () {
+                  _changeQuote(0);
+                  Navigator.pop(context);
+                },
               ),
+              ListTile(
+                title: const Text(
+                  'Sports',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                onTap: () {
+                  _changeQuote(1);
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: const Text(
+                  "Inspirational",
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                onTap: () {
+                  _changeQuote(2);
+                  Navigator.pop(context);
+                },
+              )
             ],
           ),
         ),
-      ),
-    );
+        body: GestureDetector(
+          onTap: () => _changeQuote((_currentIndex + 1) % Quote.quotes.length),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  quote.text,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+                const SizedBox(height: 18),
+                Text(
+                  quote.author,
+                  style: const TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w900,
+                    color: Colors.yellow,
+                    fontStyle: FontStyle.italic,
+                    decoration: TextDecoration.underline,
+                    decorationColor: Color.fromARGB(255, 185, 21, 9),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ));
   }
 }
